@@ -82,7 +82,6 @@ class NaiveBayes:
     else:
       return 'neg'
 
-
   def addExample(self, klass, words):
     """
      * TODO
@@ -94,7 +93,13 @@ class NaiveBayes:
     """
     self.doc_count += 1
     self.document_in_each_class[klass] += 1
+
+    # Clip words to single frequency
+    s = Set()
     for word in words:
+      s.add(word)
+
+    for word in s:
       self.sentiment_to_word_frequency_map[klass][word] += 1
       self.V.add(word)
       self.words_in_each_class[klass] += 1
